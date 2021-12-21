@@ -1,7 +1,6 @@
 import telebot
 from telebot import types
 import psycopg2
-from time import sleep
 from datetime import*
 
 
@@ -17,8 +16,8 @@ token = "***"
 bot = telebot.TeleBot(token)
 
 conn = psycopg2.connect(database="timetable_db",
-                        user="postgres",
-                        password="123",
+                        user="***",
+                        password="***",
                         host="localhost",
                         port="5432")
 
@@ -42,8 +41,6 @@ def help_message(message):
                                       '"Расписание на эту/след. неделю" - выведет расписание на эту/след. неделю\n'
                                       '/week - покажет какая сейчас неделя(верхняя/нижняя)\n'
                                       '/mtuci - ссылка на официальный сайт МТУСИ')
-    sleep(2)
-    bot.send_message(message.chat.id, 'Итак, чего Вы желаете?')
 
 
 @bot.message_handler(commands=['mtuci'])
@@ -295,6 +292,8 @@ def answer(message):
                                  + '3. ' + subj_today[2] + room_n[2] + ' ' + teacher_t[2] + '\n'
                                  + '4. ' + subj_today[3] + room_n[3] + ' ' + teacher_t[3] + '\n'
                                  + '5. ' + subj_today[4] + room_n[4] + ' ' + teacher_t[4] + '\n')
+        else:
+            bot.send_message(message.chat.id, 'Прошу прощения, я не понимаю чего Вы хотите.')
 
 
     elif week == 'Верхняя':
@@ -533,6 +532,8 @@ def answer(message):
                                  + '3. ' + subj_today[2] + room_n[2] + ' ' + teacher_t[2] + '\n'
                                  + '4. ' + subj_today[3] + room_n[3] + ' ' + teacher_t[3] + '\n'
                                  + '5. ' + subj_today[4] + room_n[4] + ' ' + teacher_t[4] + '\n')
+        else:
+            bot.send_message(message.chat.id, 'Прошу прощения, я не понимаю чего Вы хотите.')
 
 
 if __name__ == '__main__':
